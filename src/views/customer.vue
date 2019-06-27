@@ -27,7 +27,7 @@
                   :class="{'is-invalid': errors.has('email')}">
                 <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
               </div>
-            
+
               <div class="form-group">
                 <label for="username">收件人姓名</label>
                 <input type="text" class="form-control" name="name" id="username"
@@ -35,14 +35,14 @@
                   v-model="form.user.name" v-validate="'required'" placeholder="輸入姓名">
                 <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
               </div>
-            
+
               <div class="form-group">
                 <label for="usertel">收件人電話</label>
                 <input type="tel" class="form-control" name="tel" id="usertel" v-model="form.user.tel" placeholder="請輸入電話"
                 :class="{'is-invalid': errors.has('tel')}" v-validate="'required'">
                 <span class="text-danger" v-if="errors.has('tel')">電話欄位不得留空</span>
               </div>
-            
+
               <div class="form-group">
                 <label for="useraddress">收件人地址</label>
                 <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address"
@@ -50,7 +50,7 @@
                   placeholder="請輸入地址">
                 <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
               </div>
-            
+
               <div class="form-group">
                 <label for="comment">留言</label>
                 <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message" style="height:67px"></textarea>
@@ -95,7 +95,7 @@ export default {
     Navber,
     Alert
   },
-  data() {
+  data () {
     return {
       cart: {},
       coupon_code: '',
@@ -105,26 +105,26 @@ export default {
           name: '',
           email: '',
           tel: '',
-          address: '',
+          address: ''
         },
-        message: '',
+        message: ''
       }
     }
   },
   methods: {
-    getCart() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getCart () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       this.$http.get(url).then(response => {
-        vm.cart = response.data.data;
-        console.log(response.data.data);
-        vm.isLoading = false;
-      });
+        vm.cart = response.data.data
+        console.log(response.data.data)
+        vm.isLoading = false
+      })
     },
-    createOrder() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
+    createOrder () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       vm.isLoading = true
       const order = vm.form
       this.$validator.validate().then((valid) => {
@@ -145,12 +145,12 @@ export default {
         }
       })
     },
-    addCouponCode() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+    addCouponCode () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       vm.isLoading = true
       const coupon = {
-        code: vm.coupon_code,
+        code: vm.coupon_code
       }
       this.$http.post(url, { data: coupon }).then((response) => {
         vm.getCart()
@@ -158,20 +158,20 @@ export default {
         console.log(response)
         vm.isLoading = false
         vm.coupon_code = ''
-      });
+      })
     },
-    removeCartItem(id) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+    removeCartItem (id) {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.isLoading = true
       this.$http.delete(url).then((response) => {
         vm.getCart()
         console.log(response)
         vm.isLoading = false
         vm.message(response)
-      });
+      })
     },
-    message(response) {
+    message (response) {
       if (response.data.success) {
         this.$bus.$emit('message:push', response.data.message, 'success')
       } else {
@@ -179,7 +179,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.getCart()
   }
 }

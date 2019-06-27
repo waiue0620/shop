@@ -73,26 +73,24 @@
 <script>
 import Navber from '@/components/Navber'
 import TopSwiper from '@/components/topSwiper'
-import Alert from '@/components/AlertMessage'
 
 export default {
   name: 'home',
   components: {
     Navber,
-    Alert,
     TopSwiper
   },
-  data() {
+  data () {
     return {
       order: {
-        user:{},
+        user: {}
       },
       orderId: '',
-      isLoading: false,
+      isLoading: false
     }
   },
   methods: {
-    getOrder() {
+    getOrder () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
       vm.isLoading = true
@@ -102,7 +100,7 @@ export default {
         vm.isLoading = false
       })
     },
-    payOrder() {
+    payOrder () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
       vm.isLoading = true
@@ -115,7 +113,7 @@ export default {
       })
     }
   },
-  created() {
+  created () {
     this.orderId = this.$route.params.orderId
     this.getOrder()
   }

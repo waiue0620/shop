@@ -47,41 +47,40 @@
 </template>
 
 <script>
-import $ from 'jquery';
-import pagination from '../pagination';
+import pagination from '../pagination'
 
 export default {
-  data() {
+  data () {
     return {
       orders: [],
       pagination: {},
       tempOrders: {},
       isNew: false,
-      isLoading:false,
+      isLoading: false,
       status: {
-        fileUploading: false,
+        fileUploading: false
       }
-    };
+    }
   },
   components: {
-    pagination,
+    pagination
   },
   methods: {
-    getOrders(page = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`;
-      const vm = this;
+    getOrders (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
+      const vm = this
       vm.isLoading = true
       // console.log(process.env.VUE_APP_APIPATH, process.env.VUE_APP_CUSTOMPATH);
       this.$http.get(api).then(response => {
-        console.log(response.data);
-        vm.orders = response.data.orders;
+        console.log(response.data)
+        vm.orders = response.data.orders
         vm.pagination = response.data.pagination
         vm.isLoading = false
-      });
-    },
+      })
+    }
   },
-  created() {
-    this.getOrders();
+  created () {
+    this.getOrders()
   }
-};
+}
 </script>

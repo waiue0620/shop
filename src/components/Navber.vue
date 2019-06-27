@@ -26,7 +26,7 @@
             </li>
           </ul>
         </div>
-        
+
       </div>
     </nav>
   </div>
@@ -35,15 +35,15 @@
 <script>
 export default {
   name: 'Navbar',
-  data() {
+  data () {
     return {
       cart: {
         carts: []
-      },
+      }
     }
   },
   methods: {
-    signout() {
+    signout () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/logout`
       this.$http.post(url).then((response) => {
@@ -53,15 +53,15 @@ export default {
         }
       })
     },
-    getCart() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+    getCart () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       this.$http.get(url).then(response => {
-        vm.cart = response.data.data;
-      });
+        vm.cart = response.data.data
+      })
     }
   },
-  created() {
+  created () {
     this.getCart()
   }
 }

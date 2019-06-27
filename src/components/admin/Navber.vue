@@ -16,7 +16,7 @@
 export default {
   name: 'Navbar',
   methods: {
-    signout() {
+    signout () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/logout`
       this.$http.post(url).then((response) => {

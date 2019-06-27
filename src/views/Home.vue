@@ -23,6 +23,7 @@ export default {
     Alert
   }
 }
+
 </script>
 <style lang="scss" scoped>
 .footer {
@@ -33,4 +34,3 @@ export default {
   font-family: Noto Sans TC,sans-serif!important;
 }
 </style>
-

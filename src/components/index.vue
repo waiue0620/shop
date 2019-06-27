@@ -39,29 +39,29 @@
 <script>
 import CardSwiper from '@/components/cardSwiper'
 
-  export default {
-    components: {
-      CardSwiper
-    },
-    data() {
-      return {
-        menuImg: [
-          {
-            imgPath: 'img/bence-balla-schottner-1603447-unsplash.jpg',
-            text: '沙發'
-          },
-          {
-            imgPath: 'img/andrew-barrowman-1208968-unsplash.jpg',
-            text: '椅子'
-          },
-          {
-            imgPath: 'img/sarah-dorweiler-105892-unsplash.jpg',
-            text: '床'
-          }
-        ]
-      }
+export default {
+  components: {
+    CardSwiper
+  },
+  data () {
+    return {
+      menuImg: [
+        {
+          imgPath: 'img/bence-balla-schottner-1603447-unsplash.jpg',
+          text: '沙發'
+        },
+        {
+          imgPath: 'img/andrew-barrowman-1208968-unsplash.jpg',
+          text: '椅子'
+        },
+        {
+          imgPath: 'img/sarah-dorweiler-105892-unsplash.jpg',
+          text: '床'
+        }
+      ]
     }
   }
+}
 </script>
 
 <style>

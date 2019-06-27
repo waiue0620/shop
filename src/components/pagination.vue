@@ -33,7 +33,9 @@ export default {
   props: {
     pageData: {
       type: Object,
-      default: {}
+      default: function () {
+        return {}
+      }
     }
   },
   methods: {

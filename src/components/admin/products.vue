@@ -155,105 +155,105 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
-import $ from 'jquery';
-import pagination from '../pagination';
+import $ from 'jquery'
+import pagination from '../pagination'
 // import { constants } from 'crypto';
 
 export default {
-  data() {
+  data () {
     return {
       products: [],
       pagination: {},
       tempProduct: {},
       isNew: false,
-      isLoading:false,
+      isLoading: false,
       status: {
-        fileUploading: false,
+        fileUploading: false
       }
-    };
+    }
   },
   components: {
-    pagination,
+    pagination
   },
   methods: {
-    getProducts(page = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
-      const vm = this;
+    getProducts (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
+      const vm = this
       vm.isLoading = true
       // console.log(process.env.VUE_APP_APIPATH, process.env.VUE_APP_CUSTOMPATH);
       this.$http.get(api).then(response => {
-        console.log(response.data);
-        vm.products = response.data.products;
+        console.log(response.data)
+        vm.products = response.data.products
         vm.pagination = response.data.pagination
         vm.isLoading = false
-      });
+      })
     },
-    openModal(isNew, item) {
+    openModal (isNew, item) {
       const vm = this
       vm.isNew = isNew
-      if(isNew) {
+      if (isNew) {
         vm.tempProduct = {}
       } else {
-        vm.tempProduct = Object.assign({}, item);
+        vm.tempProduct = Object.assign({}, item)
       }
-      $('#productModal').modal('show');
+      $('#productModal').modal('show')
     },
-    //編輯新增產品
-    updataProduct() {
+    // 編輯新增產品
+    updataProduct () {
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`
       let httpMethod = 'post'
-      const vm = this;
-      if(!vm.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        httpMethod = 'put';
+      const vm = this
+      if (!vm.isNew) {
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
+        httpMethod = 'put'
       }
-      this.$http[httpMethod](api,{ data : vm.tempProduct } ).then(response => {
+      this.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
         if (response.data.success) {
-          $('#productModal').modal('hide');
-          vm.getProducts();
+          $('#productModal').modal('hide')
+          vm.getProducts()
         } else {
-          $('#productModal').modal('hide');
-          vm.getProducts();
-          console.log('新增失敗');
+          $('#productModal').modal('hide')
+          vm.getProducts()
+          console.log('新增失敗')
         }
-      });
+      })
     },
-    openDelModal(item) {
-      const vm = this;
-      $('#delProductModal').modal('show');
+    openDelModal (item) {
+      const vm = this
+      $('#delProductModal').modal('show')
       vm.tempProduct = Object.assign({}, item)
     },
-    delProduct() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
+    delProduct () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
       this.$http.delete(api).then(response => {
         console.log(response.data)
         $('#delProductModal').modal('hide')
         vm.getProducts()
-      });
+      })
     },
-    uploadFile() {
+    uploadFile () {
       console.log(this)
-      const uploadedFile = this.$refs.files.files[0];
-      const vm = this;
-      const formData = new FormData();
+      const uploadedFile = this.$refs.files.files[0]
+      const vm = this
+      const formData = new FormData()
       formData.append('file-to-upload', uploadedFile)
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
       vm.status.fileUploading = true
       this.$http.post(url, formData, {
         header: {
-          'Content-Type' : 'multipart/form-data'
+          'Content-Type': 'multipart/form-data'
         }
       }).then((response) => {
         console.log(response.data)
         if (response.data.success) {
           // vm.tempProduct.imageUrl = response.data.imageUrl; 沒有雙向綁定所以要利用set來強制寫入
-          vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+          vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
           vm.status.fileUploading = false
         } else {
           this.$bus.$emit('message:push', response.data.message, 'danger')
@@ -262,8 +262,8 @@ export default {
       })
     }
   },
-  created() {
-    this.getProducts();
+  created () {
+    this.getProducts()
   }
-};
+}
 </script>

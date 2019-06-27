@@ -13,30 +13,29 @@
   </div>
 </template>
 
-
 <script>
 import ItemCard from '@/components/itemCard'
 
 export default {
   name: 'home',
   components: {
-    ItemCard,
+    ItemCard
   },
-  data() {
+  data () {
     return {
       swiperOption: {
-        spaceBetween: 10,  //在slide之间设置距离（单位px）。
-        centeredSlides: false,  //设定为true时，active slide会居中，而不是默认状态下的居左。
-        grabCursor: true,   //设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。（根据浏览器形状有所不同）
+        spaceBetween: 10, // 在slide之间设置距离（单位px）。
+        centeredSlides: false, // 设定为true时，active slide会居中，而不是默认状态下的居左。
+        grabCursor: true, // 设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。（根据浏览器形状有所不同）
         pagination: {
           el: '.swiper-pagination',
-          clickable: true    //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换
+          clickable: true // 此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换
         },
-        autoplay : {
+        autoplay: {
           delay: 4000
         },
-        slidesPerView: 4,  //设置slider容器能够同时显示的slides数量(carousel模式)。
-        slidesPerGroup: 4, //在carousel mode下定义slides的数量多少为一组。
+        slidesPerView: 4, // 设置slider容器能够同时显示的slides数量(carousel模式)。
+        slidesPerGroup: 4, // 在carousel mode下定义slides的数量多少为一组。
         breakpoints: {
           480: {
             slidesPerView: 1,
@@ -58,7 +57,7 @@ export default {
       products: [],
       status: {
         loadingItem: ''
-      },
+      }
     }
   },
   props: {
@@ -69,24 +68,24 @@ export default {
       }
     }
   },
-  methods:{
-    getProducts() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+  methods: {
+    getProducts () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true
       this.$http.get(url).then(response => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.isLoading = false;
-      });
+        vm.products = response.data.products
+        console.log(response)
+        vm.isLoading = false
+      })
     },
-    addtoCart(id, qty = 1) {
+    addtoCart (id, qty = 1) {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.status.loadingItem = id
       const cart = {
         product_id: id,
-        qty,
+        qty
       }
       this.$http.post(url, { data: cart }).then((response) => {
         console.log(response)
@@ -99,7 +98,7 @@ export default {
       })
     }
   },
-  computed:{
+  computed: {
     filterData () {
       const vm = this
       console.log(vm.card.category)
@@ -114,7 +113,7 @@ export default {
   },
   created () {
     this.getProducts()
-  },
+  }
 }
 </script>
 

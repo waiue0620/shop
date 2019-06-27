@@ -20,7 +20,7 @@ export default {
   components: {
     Navber,
     Sidebar,
-    Alert,
+    Alert
   }
 }
 </script>

@@ -27,7 +27,7 @@
         <div class="col-md-8 col-lg-9">
           <div class="row">
             <div class="col-lg-4 col-md-6 mb-4" v-for="item in filterPager" :key="item.id">
-              <ItemCard :card-data="item" :loadingStatus="status" @addtoCart="addtoCart"></ItemCard>              
+              <ItemCard :card-data="item" :loadingStatus="status" @addtoCart="addtoCart"></ItemCard>
             </div>
           </div>
         <pagination :page-data="pagination" @emitPages="getPagination"></pagination>
@@ -38,17 +38,15 @@
 </template>
 
 <script>
-import $ from 'jquery'
 import ItemCard from '@/components/itemCard'
-import pagination from '@/components/pagination';
+import pagination from '@/components/pagination'
 
-import { truncate } from 'fs';
 export default {
   components: {
     ItemCard,
     pagination
   },
-  data() {
+  data () {
     return {
       products: [],
       pagination: {
@@ -67,19 +65,19 @@ export default {
       isLoading: false
     }
   },
-  methods:{
-    getProducts() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+  methods: {
+    getProducts () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true
       this.$http.get(url).then(response => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.isLoading = false;
-      });
+        vm.products = response.data.products
+        console.log(response)
+        vm.isLoading = false
+      })
     },
-    getPagination(page) {
-      const vm = this;
+    getPagination (page) {
+      const vm = this
       vm.pagination.current_page = page
       window.scrollTo({ top: 430 })
     },
@@ -88,7 +86,7 @@ export default {
       vm.prodCategory = prodCategory
       vm.pagination.current_page = 1
     },
-    searchProducts() {
+    searchProducts () {
       const vm = this
       vm.pagination.current_page = 1
       vm.prodCategory = 'All'
@@ -99,13 +97,13 @@ export default {
         vm.searchResult = []
       }
     },
-    addtoCart(id, qty = 1) {
+    addtoCart (id, qty = 1) {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.status.loadingItem = id
       const cart = {
         product_id: id,
-        qty,
+        qty
       }
       this.$http.post(url, { data: cart }).then((response) => {
         console.log(response)
@@ -114,7 +112,7 @@ export default {
         vm.message(response)
       })
     },
-    message(response) {
+    message (response) {
       if (response.data.success) {
         this.$bus.$emit('message:push', response.data.message, 'success')
       } else {
@@ -122,7 +120,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.getProducts()
   },
   computed: {
@@ -136,12 +134,12 @@ export default {
         })
       }
     },
-    filterPager() {
+    filterPager () {
       const vm = this
       const pageSize = vm.pagination.page_Size
       vm.pagination.total_pages = Math.ceil(vm.filterData.length / pageSize)
       let nowPage = vm.pagination.current_page
-      //上一頁與下一頁
+      // 上一頁與下一頁
       if (nowPage > 1) {
         vm.pagination.has_pre = true
       } else {
@@ -185,6 +183,3 @@ export default {
   }
 }
 </style>
-
-
-  

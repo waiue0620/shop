@@ -113,13 +113,13 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
-import $ from 'jquery';
-import pagination from '../pagination';
+import $ from 'jquery'
+import pagination from '../pagination'
 
 export default {
   data () {
@@ -131,61 +131,61 @@ export default {
         is_enabled: 0,
         percent: 100,
         due_date: 0,
-        code: '',
+        code: ''
       },
       isNew: false,
-      isLoading:false,
+      isLoading: false,
       status: {
-        fileUploading: false,
+        fileUploading: false
       },
-      due_date: new Date(),
-    };
+      due_date: new Date()
+    }
   },
   components: {
-    pagination,
+    pagination
   },
   watch: {
-    due_date() {
-      const vm = this;
+    due_date () {
+      const vm = this
       const timestamp = Math.floor(new Date(vm.due_date) / 1000)
       vm.tempCoupon.due_date = timestamp
-    },
+    }
   },
   methods: {
-    getCoupons(page = 1) {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      const vm = this;
+    getCoupons (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
+      const vm = this
       vm.isLoading = true
       this.$http.get(api).then(response => {
         console.log(response.data)
         vm.coupons = response.data.coupons
         vm.pagination = response.data.pagination
         vm.isLoading = false
-      });
+      })
     },
-    openModal(isNew, item) {
+    openModal (isNew, item) {
       const vm = this
       vm.isNew = isNew
-      if(isNew) {
+      if (isNew) {
         vm.tempCoupon = {}
-        vm.due_date= new Date().toISOString().split('T')[0]
+        vm.due_date = new Date().toISOString().split('T')[0]
       } else {
-        vm.tempCoupon = Object.assign({}, item);
+        vm.tempCoupon = Object.assign({}, item)
         const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T')
         vm.due_date = dateAndTime[0]
       }
       $('#couponModal').modal('show')
     },
-    //編輯新增優惠券
-    updateCoupon() {
+    // 編輯新增優惠券
+    updateCoupon () {
       const vm = this
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
       let httpMethod = 'post'
-      if(!vm.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+      if (!vm.isNew) {
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
         httpMethod = 'put'
       }
-      this.$http[httpMethod](api,{ data : vm.tempCoupon } ).then(response => {
+      this.$http[httpMethod](api, { data: vm.tempCoupon }).then(response => {
         if (response.data.success) {
           $('#couponModal').modal('hide')
           vm.getCoupons()
@@ -194,25 +194,25 @@ export default {
           vm.getCoupons()
           console.log('新增失敗')
         }
-      });
+      })
     },
-    openDelCouponModal(item) {
+    openDelCouponModal (item) {
       const vm = this
       $('#delcouponModal').modal('show')
       vm.tempCoupon = Object.assign({}, item)
     },
-    delCoupons() {
+    delCoupons () {
       const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
       this.$http.delete(api).then(response => {
         console.log(response.data)
         $('#delcouponModal').modal('hide')
         vm.getCoupons()
       })
-    },
+    }
   },
-  created() {
-    this.getCoupons();
+  created () {
+    this.getCoupons()
   }
-};
+}
 </script>

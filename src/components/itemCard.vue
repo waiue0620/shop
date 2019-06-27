@@ -49,11 +49,11 @@ export default {
     }
   },
   methods: {
-    addtoCart() {
+    addtoCart () {
       const vm = this
       vm.$emit('addtoCart', vm.cardData.id)
     },
-    productInfo() {
+    productInfo () {
       const vm = this
       vm.$router.push(`/detailed/${vm.cardData.id}`)
     }
@@ -63,14 +63,14 @@ export default {
 
 <style lang="scss" scoped>
 .itemCard {
-	border:1px solid darken(#EAF0ED,10%);
-	overflow: hidden;
+  border:1px solid darken(#EAF0ED,10%);
+  overflow: hidden;
 }
 .itemCard-img {
-	background-position: center center;
-	background-size: cover;
-	height: 150px;
-	display: block;
+  background-position: center center;
+  background-size: cover;
+  height: 150px;
+  display: block;
 }
 .itemCard-body,.itemCard-price {
   padding:10px 15px 10px 15px;
@@ -86,19 +86,19 @@ export default {
   }
 }
 .itemCard-price{
-	display: flex;
-	justify-content: space-between;
-	align-items: baseline;
-	span{
-		font-size: 12px;
-		font-style:italic;
-		text-decoration:line-through;
-	}
-	h4{
-		margin-bottom: 0;
-		font-size: 18px;
-		font-weight: bolder;
-	}
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  span{
+    font-size: 12px;
+    font-style:italic;
+    text-decoration:line-through;
+  }
+  h4{
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: bolder;
+  }
 }
 .itemCard-footer {
   .btn {
@@ -107,9 +107,9 @@ export default {
     border-radius: 0;
     font-weight: bolder;
     overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
     transition: all .3s;
     opacity: 1;
     &:hover {

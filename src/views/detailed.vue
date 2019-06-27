@@ -51,7 +51,7 @@ export default {
     Alert,
     CardSwiper
   },
-  data() {
+  data () {
     return {
       productId: '',
       product: {},
@@ -62,24 +62,24 @@ export default {
     }
   },
   methods: {
-    getProduct(id) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.productId}`;
-      vm.isLoading = true;
+    getProduct (id) {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.productId}`
+      vm.isLoading = true
       this.$http.get(url).then((response) => {
-        vm.product = response.data.product;
+        vm.product = response.data.product
         vm.product.num = 1
-        console.log(response);
-        vm.isLoading = false;
-      });
+        console.log(response)
+        vm.isLoading = false
+      })
     },
-    addtoCart(id, qty = 1) {
+    addtoCart (id, qty = 1) {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.status.loadingItem = id
       const cart = {
         product_id: id,
-        qty,
+        qty
       }
       this.$http.post(url, { data: cart }).then((response) => {
         console.log(response)
@@ -89,7 +89,7 @@ export default {
         vm.message(response)
       })
     },
-    message(response) {
+    message (response) {
       if (response.data.success) {
         this.$bus.$emit('message:push', response.data.message, 'success')
       } else {
@@ -97,7 +97,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.productId = this.$route.params.productId
     this.getProduct()
   }
