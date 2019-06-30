@@ -8,7 +8,7 @@
         <div class="col-md-7">
           <img class="bg-cover img-fluid" :src="product.imageUrl" alt="">
         </div>
-        <div class="col-md-5 px-5">
+        <div class="col-md-5">
           <h2>{{ product.title }}</h2>
           <p>{{product.description}}</p>
           <div class="d-flex justify-content-between">
@@ -25,7 +25,7 @@
               小計 <strong>{{ product.num * product.price }}</strong> 元
             </div>
             <button type="button" class="btn btn-primary"
-              @click="addtoCart(product.id, product.num)">
+              @click="addtoCart(product.id, product.num)" :disabled="status.loadingItem != ''">
               <i class="fas fa-spinner fa-spin" v-if="product.id === status.loadingItem"></i>
               加到購物車
             </button>
@@ -43,7 +43,7 @@
 <script>
 import Navber from '@/components/Navber'
 import Alert from '@/components/AlertMessage'
-import CardSwiper from '@/components/cardSwiper'
+import CardSwiper from '@/components/CardSwiper'
 
 export default {
   components: {

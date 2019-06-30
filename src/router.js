@@ -16,34 +16,35 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      redirect: 'index',
       component: () => import('./views/Home.vue'),
       children: [
         {
           path: 'index',
           name: 'index',
-          component: () => import('./components/index')
+          component: () => import('./components/Index')
         },
         {
           path: 'shopping',
           name: 'shopping',
-          component: () => import('./components/shopping')
+          component: () => import('./components/Shopping')
         }
       ]
     },
     {
       path: '/detailed/:productId',
       name: 'detailed',
-      component: () => import('./views/detailed.vue')
+      component: () => import('./views/Detailed.vue')
     },
     {
       path: '/check_order/:orderId',
       name: 'checkOrder',
-      component: () => import('./views/checkOrder.vue')
+      component: () => import('./views/CheckOrder.vue')
     },
     {
       path: '/customer',
       name: 'customer',
-      component: () => import('./views/customer.vue')
+      component: () => import('./views/Customer.vue')
     },
     {
       path: '/login',
@@ -53,24 +54,24 @@ export default new Router({
     {
       path: '/admin',
       name: 'Dashboard',
-      component: () => import('./views/admin/dashboard'),
+      component: () => import('./views/admin/Dashboard'),
       children: [
         {
           path: 'products',
           name: 'products',
-          component: () => import('./components/admin/products'),
+          component: () => import('./components/admin/Products'),
           meta: { requiresAuth: true }
         },
         {
           path: 'orders',
           name: 'orders',
-          component: () => import('./components/admin/orders'),
+          component: () => import('./components/admin/Orders'),
           meta: { requiresAuth: true }
         },
         {
           path: 'coupons',
           name: 'coupons',
-          component: () => import('./components/admin/coupons'),
+          component: () => import('./components/admin/Coupons'),
           meta: { requiresAuth: true }
         }
       ]
@@ -78,12 +79,12 @@ export default new Router({
     {
       path: '/',
       name: 'Dashboard',
-      component: () => import('./views/admin/dashboard'),
+      component: () => import('./views/admin/Dashboard'),
       children: [
         {
           path: 'customer_order',
           name: 'customerOrder',
-          component: () => import('./components/admin/customerOrder')
+          component: () => import('./components/admin/CustomerOrder')
         },
         {
           path: 'Customer_checkout/:orderId',

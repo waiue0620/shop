@@ -72,7 +72,7 @@
 
 <script>
 import Navber from '@/components/Navber'
-import TopSwiper from '@/components/topSwiper'
+import TopSwiper from '@/components/TopSwiper'
 
 export default {
   name: 'home',

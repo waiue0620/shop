@@ -49,7 +49,10 @@ export default {
   background-size: cover;
   background-position: center 60% ;
 }
-.swiper-container{
+.swiper-container {
   height: 400px;
+}
+.container {
+  padding-top: 66px;
 }
 </style>

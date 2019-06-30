@@ -12,7 +12,7 @@
 
 <script>
 import Navber from '@/components/Navber'
-import TopSwiper from '@/components/topSwiper'
+import TopSwiper from '@/components/TopSwiper'
 import Alert from '@/components/AlertMessage'
 
 export default {

@@ -119,7 +119,7 @@
 
 <script>
 import $ from 'jquery'
-import pagination from '../pagination'
+import pagination from '../Pagination'
 
 export default {
   data () {

@@ -12,7 +12,7 @@
               <img class="cartList-img img-fluid" :src="item.product.imageUrl" alt="">
               <router-link :to="'/detailed/${item.id}'">{{item.product.title}}</router-link>
               <p class="m-0">{{ item.qty }} {{item.product.unit}} {{item.final_total | currency }}</p>
-              <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)"><i class="far fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)" :disabled="isLoading" ><i class="far fa-trash-alt"></i></button>
             </li>
           </ul>
         </div>
@@ -72,7 +72,7 @@
                 <p class="m-0">{{ cart.final_total | currency }}</p>
               </div>
               <div class="text-right">
-                <button class="btn btn-danger">送出訂單</button>
+                <button class="btn btn-danger" :disabled="isLoading">送出訂單</button>
               </div>
             </form>
           </div>

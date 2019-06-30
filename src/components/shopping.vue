@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import ItemCard from '@/components/itemCard'
-import pagination from '@/components/pagination'
+import ItemCard from '@/components/ItemCard'
+import pagination from '@/components/Pagination'
 
 export default {
   components: {

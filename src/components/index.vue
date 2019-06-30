@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import CardSwiper from '@/components/cardSwiper'
+import CardSwiper from '@/components/CardSwiper'
 
 export default {
   components: {

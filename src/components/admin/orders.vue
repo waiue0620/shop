@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import pagination from '../pagination'
+import pagination from '../Pagination'
 
 export default {
   data () {

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container">
-      <div class="row">
+    <div class="container p-0">
+      <div>
         <swiper :options="swiperOption" class="">
           <swiper-slide v-for="item in filterData" :key="item.id">
             <ItemCard :card-data="item" :loadingStatus="status" @addtoCart="addtoCart"></ItemCard>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ItemCard from '@/components/itemCard'
+import ItemCard from '@/components/ItemCard'
 
 export default {
   name: 'home',
@@ -50,7 +50,7 @@ export default {
           992: {
             slidesPerView: 3,
             slidesPerGroup: 3,
-            spaceBetween: 30
+            spaceBetween: 20
           }
         }
       },
